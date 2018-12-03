@@ -1,6 +1,7 @@
 package masterung.th.in.androidthai.ungfriendy;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 
 /**
@@ -20,6 +22,9 @@ public class RegisterFragment extends Fragment {
 
     //    Explicit
     private boolean aBoolean = true;
+    private ImageView imageView;
+
+
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -32,8 +37,39 @@ public class RegisterFragment extends Fragment {
 //        Create Toolbar
         createToolbar();
 
+//        Avata Controller
+        avataController();
 
     }   // Main Method
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == getActivity().RESULT_OK) {
+
+            aBoolean = false;
+
+
+
+        }   // if
+
+    }
+
+    private void avataController() {
+        imageView = getView().findViewById(R.id.imvAvata);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent, "Please App and Picture"),
+                        5);
+
+            }
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
