@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 
@@ -27,7 +28,6 @@ public class RegisterFragment extends Fragment {
     private boolean aBoolean = true;
     private ImageView imageView;
     private Uri uri;
-
 
 
     public RegisterFragment() {
@@ -67,7 +67,6 @@ public class RegisterFragment extends Fragment {
             }
 
 
-
         }   // if
 
     }
@@ -101,8 +100,25 @@ public class RegisterFragment extends Fragment {
     private void checkAndUploadValue() {
 
         MyAlert myAlert = new MyAlert(getActivity());
+
+//        Get Value From EditText
+        EditText nameEditText = getView().findViewById(R.id.edtName);
+        EditText userEditText = getView().findViewById(R.id.edtUser);
+        EditText passwordEditText = getView().findViewById(R.id.edtPassword);
+
+        String nameString = nameEditText.getText().toString().trim();
+        String userString = userEditText.getText().toString().trim();
+        String passwordString = passwordEditText.getText().toString().trim();
+
+
         if (aBoolean) {
             myAlert.normalDialog("Non Choose Avata ???", "Please Choose Avata");
+        } else if (nameString.isEmpty() || userString.isEmpty() || passwordString.isEmpty()) {
+            myAlert.normalDialog("Have Space", "Please Fill Every Blank");
+        } else {
+
+
+
         }
 
     }   // checkAndUpload
@@ -115,7 +131,7 @@ public class RegisterFragment extends Fragment {
 
     private void createToolbar() {
         Toolbar toolbar = getView().findViewById(R.id.toolbarRegister);
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.register));
         ((MainActivity) getActivity()).getSupportActionBar().setSubtitle("Please Fill All Blank");
         ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
