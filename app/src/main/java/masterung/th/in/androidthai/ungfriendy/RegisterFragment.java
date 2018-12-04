@@ -2,6 +2,9 @@ package masterung.th.in.androidthai.ungfriendy;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +26,7 @@ public class RegisterFragment extends Fragment {
     //    Explicit
     private boolean aBoolean = true;
     private ImageView imageView;
+    private Uri uri;
 
 
 
@@ -49,6 +53,18 @@ public class RegisterFragment extends Fragment {
         if (resultCode == getActivity().RESULT_OK) {
 
             aBoolean = false;
+            uri = data.getData();
+
+            try {
+
+                Bitmap bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uri));
+                Bitmap bitmap1 = Bitmap.createScaledBitmap(bitmap, 800, 600, false);
+                imageView.setImageBitmap(bitmap1);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
 
